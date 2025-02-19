@@ -15,6 +15,8 @@ public class Main {
        System.out.printf("Делаем шаг назад: %s%n",builder.undo());
        System.out.printf("Разворачиваем строку: %s%n",builder.reverse());
        System.out.printf("Удаляем строку: %s%n",builder.delete(0, builder.length()));
-       System.out.printf("Делаем 2 шага назад: %s%n",builder.undo(2));
+       builder.undo();
+       System.out.printf("Делаем 2 шага назад: %s%n",builder.undo());
+
     }
 }

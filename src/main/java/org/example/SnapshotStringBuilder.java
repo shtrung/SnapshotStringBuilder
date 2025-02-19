@@ -1,12 +1,12 @@
 package org.example;
 
-import java.util.LinkedList;
-import java.util.List;
+
+import java.util.Stack;
 
 public class SnapshotStringBuilder {
 
     private StringBuilder builder;
-    private final List<Memento> undoMementos = new LinkedList<>();
+    private final Stack<Memento> undoMementos = new Stack<>();
 
     public SnapshotStringBuilder() {
         builder = new StringBuilder();
@@ -28,37 +28,6 @@ public class SnapshotStringBuilder {
         return this;
     }
 
-    public SnapshotStringBuilder append(boolean b) {
-        saveState();
-        builder.append(b);
-        return this;
-    }
-    public SnapshotStringBuilder append(long lng) {
-        saveState();
-        builder.append(lng);
-        return this;
-    }
-    public SnapshotStringBuilder append(float f) {
-        saveState();
-        builder.append(f);
-        return this;
-    }
-    public SnapshotStringBuilder append(int i) {
-        saveState();
-        builder.append(i);
-        return this;
-    }
-
-    public SnapshotStringBuilder append(char c) {
-        saveState();
-        builder.append(c);
-        return this;
-    }
-    public SnapshotStringBuilder append(double d) {
-        saveState();
-        builder.append(d);
-        return this;
-    }
 
     public SnapshotStringBuilder reverse(){
         saveState();
@@ -77,24 +46,11 @@ public class SnapshotStringBuilder {
         undoMementos.add(memento);
     }
 
-    public SnapshotStringBuilder undo(int stepBack) {
-      if(stepBack==1){
-          undo();
-          return this;
-      }else if(!undoMementos.isEmpty()){
-          Memento memento = undoMementos.get(undoMementos.size()-stepBack);
-          builder = new StringBuilder(memento.state());
-          undoMementos.remove(memento);
-          return this;
-      }
-      return this;
-    }
 
     public SnapshotStringBuilder undo() {
         if(!undoMementos.isEmpty()){
-            Memento memento = undoMementos.get(undoMementos.size()-1);
+            Memento memento = undoMementos.pop();
             builder = new StringBuilder(memento.state());
-            undoMementos.remove(memento);
             return this;
         }
         return this;
