@@ -43,7 +43,8 @@ public class SnapshotStringBuilder {
 
     private void saveState() {
         Memento memento = new Memento(builder.toString());
-        undoMementos.add(memento);
+        undoMementos.push(memento);
+
     }
 
 
